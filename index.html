@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*****
+Custom Pure CSS vertical carousel animation https://codepen.io/aija/pen/xvXWoK
+******/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Work Sans', sans-serif;
+  font-weight: 400;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(60deg, #420285, #08BDBD);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.vs-container {
+	position: relative;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+}
+
+.vs-wrapper {
+	position: relative;
+	width: 100%;
+	max-width: 330px;
+	height: 100%;
+  margin: auto;
+	display: flex;
+	justify-content: center;
+  overflow: hidden;
+}
+
+.vs-carousel {
+	position: relative;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+.vs-carousel__item {
+	position: relative;
+	width: 100%;
+	display: none;
+	align-items: center;
+	opacity: 0;
+	transition: opacity 0.5s;
+	padding: 0 12px;
+}
+
+.vs-carousel__item-head {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	width: 60px;
+	height: 60px;
+	padding: 0;
+	margin-right: -45px;
+	flex-shrink: 0;
+	border-radius: 50%;
+	background-color: #d7f7fc;
+}
+
+/* .vs-carousel__item-body {
+	display: flex;
+	align-items: start;
+	justify-content: center;
+	flex-direction: column;
+	width: 100%;
+	margin-left: 25px;
+  padding-bottom: 0.5rem;
+	padding: 0 10px 0 30px;
+	border-radius: 8px;
+	background-color: #fff;
+	line-height: 1;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.09);
+} */
+
+.vs-carousel__item-title {
+  font-size: 16px;
+  font-weight: bold;
+  padding-top: 0.5rem;
+  padding-bottom: 0.25rem;
+}
+
+.vs-carousel__item-description {
+  font-size: 12px;
+  padding-bottom: 0.5rem;
+}
+
+.box-container-swiper{
+  width: 200px;
+  height: 200px;
+  position: relative;
+  box-shadow: 1px 1px 7px;
+  transition: ease-in-out;
+  transition-duration: 0.5s;
+  border-radius: 15px;
+  
+  
+  margin-top: 40px;
+
+}
+.box-container-swiper:hover{
+  scale: 1.2;
+  
+}
+
+.picer-container-swiper{
+  background-image: url(./asset/1.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 200px;
+  height: 200px;
+  border-radius: 15px;
+  
+}
+.picer-container-swiper:hover{
+  border-radius: 15px;
+}
+.texter-container-swiper{
+  position: absolute;
+  bottom: 0px;
+  text-align: center;
+  padding: 5px;
+  background-color: transparent;
+  color: white;
+  font-size: 15px;
+  
+  background-color: transparent 10px;
+  backdrop-filter: blur(10px);
+ 
+  
+}
+
+.btn > a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 25px;
+}
+
+.vs-previous {
+	display: flex;
+	align-items: center;
+	transform: scale(0.7);
+	visibility: visible;
+	opacity: 0.4;
+	will-change: transform, opacity;
+	animation-name:  vs-carousel-animate-vertical-previous, vs-carousel-animate-vertical-remove;
+	animation-delay: 0s, 0.5s;
+	animation-duration: 0.5s, 3s;
+	animation-timing-function: linear;
+}
+@keyframes vs-carousel-animate-vertical-previous {
+	0% {
+		transform: translateY(100%) scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(0) scale(0.7);
+		opacity: 0.4;
+	}
+}
+@keyframes vs-carousel-animate-vertical-remove {
+	0% {
+		opacity: 0.4;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+.vs-active {
+	display: flex;
+	align-items: center;
+	transform: scale(1);
+	visibility: visible;
+	opacity: 1;
+	will-change: transform, opacity;
+	animation: vs-carousel-animate-vertical-active 0.5s linear;
+}
+@keyframes vs-carousel-animate-vertical-active {
+	0% {
+		transform: translateY(100%) scale(0.7);
+		opacity: 0.4;
+	}
+	100% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}
+}
+
+.vs-next {
+	display: flex;
+	align-items: center;
+	transform: scale(0.7);
+	visibility: visible;
+	opacity: 0.4;
+	will-change: transform, opacity;
+	animation: vs-carousel-animate-vertical-next 0.5s linear;
+}
+@keyframes vs-carousel-animate-vertical-next {
+	0% {
+		transform: translateY(100%) scale(0.5);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0) scale(0.7);
+		opacity: 0.4;
+	}
+}
+
+.vs-previous-reverse {
+	display: flex;
+	align-items: center;
+	transform: scale(0.7);
+	visibility: visible;
+	opacity: 0.4;
+	will-change: transform, opacity;
+	animation-name:  vs-carousel-animate-vertical-previous-reverse, vs-carousel-animate-vertical-remove-reverse;
+	animation-delay: 0s, 0.5s;
+	animation-duration: 0.5s, 3s;
+	animation-timing-function: linear;
+}
+@keyframes vs-carousel-animate-vertical-previous-reverse {
+	0% {
+		transform: translateY(-100%) scale(1);
+		opacity: 1;
+	}
+	100% {
+		transform: translateY(0) scale(0.7);
+		opacity: 0.4;
+	}
+}
+@keyframes vs-carousel-animate-vertical-remove-reverse {
+	0% {
+		opacity: 0.4;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+.vs-active-reverse {
+	display: flex;
+	align-items: center;
+	transform: scale(1);
+	visibility: visible;
+	opacity: 1;
+	will-change: transform, opacity;
+	animation: vs-carousel-animate-vertical-active-reverse 0.5s linear;
+}
+@keyframes vs-carousel-animate-vertical-active-reverse {
+	0% {
+		transform: translateY(-100%) scale(0.7);
+		opacity: 0.4;
+	}
+	100% {
+		transform: translateY(0) scale(1);
+		opacity: 1;
+	}
+}
+.vs-next-reverse {
+	display: flex;
+	align-items: center;
+	transform: scale(0.7);
+	visibility: visible;
+	opacity: 0.4;
+	will-change: transform, opacity;
+	animation: vs-carousel-animate-vertical-next-reverse 0.5s linear;
+}
+@keyframes vs-carousel-animate-vertical-next-reverse {
+	0% {
+		transform: translateY(-100%) scale(0.5);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0) scale(0.7);
+		opacity: 0.4;
+	}
+}
+    </style>
+</head>
+<body>
+    
+    <!--
+Vanilla JS version of JQuery Vertical Slider
+https://codepen.io/adamjld/pen/oxyKKb
+Pure CSS vertical carousel animation https://codepen.io/aija/pen/xvXWoK
+Images:
+Lorem Picsum
+https://picsum.photos/
+-->
+
+
+<div class="vs-container">
+	
+	<!-- FIRST VERTICAL SCROLLING BEGIN -->
+	<div class="vs-wrapper">
+		<div class="vs-carousel">
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- FIRST VERTICAL SCROLLING END -->
+	
+	
+	<!--
+SECOND VERTICAL REVERSE SCROLLING BEGIN
+add class vs-reverse
+-->
+<div class="vs-wrapper">
+	<div class="vs-carousel">
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+	<!-- SECOND VERTICAL REVERSE SCROLLING END -->
+    <div class="vs-wrapper">
+		<div class="vs-carousel">
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+			<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+				
+				<div class="vs-carousel__item-body">
+					<div class="box-container-swiper">
+						<div class="picer-container-swiper"></div>
+						
+						<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+				
+						</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+	<!-- FIRST VERTICAL SCROLLING END -->
+	
+	
+	<!--
+SECOND VERTICAL REVERSE SCROLLING BEGIN
+add class vs-reverse
+-->
+<div class="vs-wrapper">
+	<div class="vs-carousel">
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+		<div class="vs-carousel__item cursor-pointer" data-href="#" data-target="_blank" onclick="if (this.dataset.href !== '#') window.open(this.dataset.href, this.dataset.target);">
+			
+			<div class="vs-carousel__item-body">
+				<div class="box-container-swiper">
+					<div class="picer-container-swiper"></div>
+					
+					<div class="texter-container-swiper">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, saepe accusamus perferendis doloremque nisi</div>
+			
+					</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+</div>
+<script>
+    /*****
+Vanilla JS version of JQuery Vertical Slider
+https://codepen.io/adamjld/pen/oxyKKb
+******/
+let VerticalCarousel = function(element){
+	this.slideUp = function(){
+		
+		let sliders = document.querySelectorAll(element);
+		
+		if (sliders && sliders !== null && sliders.length > 0 ){
+			sliders.forEach( ( el ) => {
+				
+				if ( el.classList.contains('vs-reverse') ) {
+					
+					el.firstElementChild.classList.add('vs-previous-reverse');
+					let initClone = el.getElementsByClassName('vs-previous-reverse')[0].cloneNode(true);
+					el.appendChild( initClone );
+					el.firstElementChild.remove();
+					
+					el.querySelector('.vs-carousel__item:nth-last-of-type(2)').classList.add('vs-active-reverse');
+					el.querySelector('.vs-carousel__item:nth-last-of-type(3)').classList.add('vs-next-reverse');
+					
+					setInterval( function(){
+						
+						let elClone = el.getElementsByClassName('vs-previous-reverse')[0].cloneNode(true);
+						el.prepend( elClone );
+						elClone.classList.remove('vs-previous-reverse');
+						el.lastElementChild.remove();
+						
+						let first = el.querySelector('.vs-active-reverse');
+						first.classList.add('vs-previous-reverse');
+						first.classList.remove('vs-active-reverse');
+						
+						let second = el.querySelector('.vs-next-reverse');
+						second.classList.add('vs-active-reverse');
+						second.classList.remove('vs-next-reverse');
+						
+						el.querySelector('.vs-carousel__item:nth-last-of-type(3)').classList.toggle('vs-next-reverse');
+						
+					}, 3000);
+				
+				} else {
+					
+					el.lastElementChild.classList.add('vs-previous');
+					let initCloneReverse = el.getElementsByClassName('vs-previous')[0].cloneNode(true);
+					el.prepend( initCloneReverse );
+					el.lastElementChild.remove();
+					
+					el.firstElementChild.nextElementSibling.classList.add('vs-active');
+					el.firstElementChild.nextElementSibling.nextElementSibling.classList.add('vs-next');
+					
+					setInterval( function(){
+						
+						let elClone = el.getElementsByClassName('vs-previous')[0].cloneNode(true);
+						el.appendChild( elClone );
+						elClone.classList.remove('vs-previous');
+						el.firstElementChild.remove();
+						
+						let first = el.querySelector('.vs-active');
+						first.classList.add('vs-previous');
+						first.classList.remove('vs-active');
+						
+						let second = el.querySelector('.vs-next');
+						second.classList.add('vs-active');
+						second.classList.remove('vs-next');
+						
+						second.nextElementSibling.classList.toggle('vs-next');
+						
+					}, 3000);
+					
+				}
+				
+			});
+		}
+	}
+};
+let c = new VerticalCarousel('.vs-carousel');
+c.slideUp();
+</script>
+
+</body>
+</html>
